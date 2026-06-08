@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomyMed — Final Çalışma Rehberi</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2236;
+    --card: #161d2e;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0f4ff;
+    --muted: #8895b3;
+    --accent: #4f8ef7;
+    --accent2: #7c3aed;
+    --green: #22d3a0;
+    --amber: #f59e0b;
+    --red: #f87171;
+    --pink: #f472b6;
+    --teal: #2dd4bf;
+    --font: 'Syne', sans-serif;
+    --serif: 'Instrument Serif', serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 50%, #1a0f2e 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    min-height: 340px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-text { padding: 3rem 0; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(79,142,247,0.12);
+    border: 1px solid rgba(79,142,247,0.3);
+    color: #93c5fd;
+    font-size: 12px;
+    font-family: var(--mono);
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  h1 {
+    font-family: var(--font);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  h1 span.grad {
+    background: linear-gradient(135deg, #4f8ef7, #c084fc, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .stat-num {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--mono);
+  }
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .body-svg-wrap {
+    position: relative;
+    width: 200px;
+    height: 320px;
+  }
+
+  .body-svg-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .glow-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(79,142,247,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 1rem 1.2rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-family: var(--mono);
+  }
+
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* SECTION HEADER */
+  .sec-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .sec-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .sec-sub {
+    color: var(--muted);
+    font-size: 14px;
+    font-family: var(--mono);
+    margin-top: 4px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem;
+    cursor: pointer;
+    transition: all 0.22s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; height: 2px;
+    border-radius: 14px 14px 0 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.c-blue::before { background: var(--accent); }
+  .card.c-green::before { background: var(--green); }
+  .card.c-purple::before { background: var(--accent2); }
+  .card.c-amber::before { background: var(--amber); }
+  .card.c-pink::before { background: var(--pink); }
+  .card.c-teal::before { background: var(--teal); }
+  .card.c-red::before { background: var(--red); }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .card-icon.blue { background: rgba(79,142,247,0.15); }
+  .card-icon.green { background: rgba(34,211,160,0.15); }
+  .card-icon.purple { background: rgba(124,58,237,0.15); }
+  .card-icon.amber { background: rgba(245,158,11,0.15); }
+  .card-icon.pink { background: rgba(244,114,182,0.15); }
+  .card-icon.teal { background: rgba(45,212,191,0.15); }
+  .card-icon.red { background: rgba(248,113,113,0.15); }
+
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .tag {
+    font-size: 11px;
+    font-family: var(--mono);
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* DETAIL PANEL */
+  .detail-panel {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .detail-panel.open { display: block; }
+
+  .detail-head {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .detail-head h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .detail-head .close-btn {
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 20px;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    font-family: var(--font);
+  }
+
+  .detail-head .close-btn:hover { color: var(--text); }
+
+  .detail-body {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media(max-width:700px) { .detail-body { grid-template-columns: 1fr; } }
+
+  .detail-col h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 0.8rem;
+  }
+
+  .fact-list {
+    list-style: none;
+  }
+
+  .fact-list li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .fact-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .fact-list li:last-child { border-bottom: none; }
+
+  .fact-list li strong { color: var(--text); }
+
+  /* QUIZ SECTION */
+  .quiz-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .quiz-progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--pink));
+    border-radius: 4px;
+    transition: width 0.4s;
+  }
+
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-num {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .quiz-q {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .quiz-opt {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-family: var(--font);
+    text-align: left;
+  }
+
+  .quiz-opt:hover:not(:disabled) {
+    background: rgba(79,142,247,0.08);
+    border-color: rgba(79,142,247,0.3);
+  }
+
+  .quiz-opt.correct {
+    background: rgba(34,211,160,0.12);
+    border-color: rgba(34,211,160,0.4);
+    color: var(--green);
+  }
+
+  .quiz-opt.wrong {
+    background: rgba(248,113,113,0.1);
+    border-color: rgba(248,113,113,0.3);
+    color: var(--red);
+  }
+
+  .quiz-opt .opt-letter {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-family: var(--mono);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  .quiz-explain {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(79,142,247,0.06);
+    border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    display: none;
+    line-height: 1.6;
+  }
+
+  .quiz-explain.show { display: block; }
+  .quiz-explain strong { color: var(--text); }
+
+  .quiz-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: var(--font);
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: #3b7de8; }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--border2);
+    color: var(--text);
+  }
+
+  .btn-ghost:hover { background: var(--bg3); }
+
+  .quiz-score {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .score-big {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--accent), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .score-msg {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* FLASHCARDS */
+  .flashcard-wrap {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .flashcard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .fc-front, .fc-back {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .fc-back {
+    transform: rotateY(180deg);
+    background: var(--bg3);
+  }
+
+  .fc-hint {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .fc-question {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .fc-answer {
+    font-size: 1rem;
+    color: var(--green);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .fc-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .fc-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .fc-counter {
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--muted);
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* MNEMONICS */
+  .mnemonic-grid {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .mnemonic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem;
+    transition: border-color 0.2s;
+  }
+
+  .mnemonic-card:hover { border-color: var(--border2); }
+
+  .mnemonic-label {
+    font-size: 11px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    margin-bottom: 0.6rem;
+  }
+
+  .mnemonic-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .mnemonic-text {
+    font-size: 1.1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .mnemonic-expand {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .mnemonic-expand span {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* PROGRESS */
+  .progress-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 1s;
+  }
+
+  .progress-pct {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.8rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem; top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,142,247,0.2);
+  }
+
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+
+  .compare-table th {
+    padding: 0.7rem 1rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+  }
+
+  .compare-table td {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .compare-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* PILL */
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-family: var(--mono);
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin: 2px;
+  }
+
+  .pill-blue { background: rgba(79,142,247,0.15); color: #93c5fd; }
+  .pill-green { background: rgba(34,211,160,0.15); color: var(--green); }
+  .pill-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .pill-red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .pill-pink { background: rgba(244,114,182,0.15); color: var(--pink); }
+
+  /* SEARCH */
+  .search-bar {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    font-size: 14px;
+    color: var(--text);
+    font-family: var(--font);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: var(--mono);
+  }
+
+  .floating-tip {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 50;
+    animation: slideup 0.4s ease;
+  }
+
+  @keyframes slideup { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+  @media(max-width:800px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .detail-body { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="badge">2. Sınıf Tıp · Final Hazırlık 2024</div>
+      <h1>Anatomi<br><span class="grad">Final Rehberi</span></h1>
+      <p class="hero-sub">Sinir sistemi, dolaşım, kaslar ve organlar — eğlenceli, detaylı ve sınav odaklı çalışma materyali.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-top:0.2rem;margin-bottom:0.5rem;background:rgba(244,114,182,0.08);border:1px solid rgba(244,114,182,0.25);border-radius:100px;padding:6px 16px;">
+        <span style="font-size:15px">💙</span>
+        <span style="font-size:13px;font-family:var(--serif);font-style:italic;color:#f9a8d4;letter-spacing:0.01em">Sema'ya ithafen hazırlanmıştır</span>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">8</div>
+          <div class="stat-label">Sistem</div>
+        </div>
+        <div>
+          <div class="stat-num">60+</div>
+          <div class="stat-label">Quiz Sorusu</div>
+        </div>
+        <div>
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Flashcard</div>
+        </div>
+        <div>
+          <div class="stat-num">25+</div>
+          <div class="stat-label">Mnemonic</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="body-svg-wrap">
+        <div class="glow-ring"></div>
+        <svg viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head -->
+          <ellipse cx="60" cy="30" rx="24" ry="28" fill="none" stroke="rgba(79,142,247,0.6)" stroke-width="1.5"/>
+          <!-- Brain inside -->
+          <ellipse cx="60" cy="26" rx="14" ry="12" fill="rgba(124,58,237,0.2)" stroke="rgba(124,58,237,0.5)" stroke-width="1"/>
+          <!-- Neck -->
+          <rect x="52" y="57" width="16" height="15" rx="4" fill="none" stroke="rgba(79,142,247,0.4)" stroke-width="1.2"/>
+          <!-- Torso -->
+          <rect x="30" y="72" width="60" height="85" rx="12" fill="none" stroke="rgba(79,142,247,0.5)" stroke-width="1.5"/>
+          <!-- Heart -->
+          <path d="M50 95 Q50 88 58 92 Q66 88 66 95 Q66 104 58 110 Q50 104 50 95Z" fill="rgba(248,113,113,0.25)" stroke="rgba(248,113,113,0.7)" stroke-width="1"/>
+          <!-- Lungs -->
+          <ellipse cx="44" cy="100" rx="10" ry="14" fill="rgba(79,142,247,0.1)" stroke="rgba(79,142,247,0.4)" stroke-width="0.8"/>
+          <ellipse cx="76" cy="100" rx="10" ry="14" fill="rgba(79,142,247,0.1)" stroke="rgba(79,142,247,0.4)" stroke-width="0.8"/>
+          <!-- Liver/stomach -->
+          <ellipse cx="57" cy="128" rx="18" ry="10" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="0.8"/>
+          <!-- Intestines -->
+          <path d="M38 148 Q28 155 35 165 Q45 175 55 165 Q65 155 75 165 Q85 175 82 158" fill="none" stroke="rgba(244,114,182,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Arms -->
+          <path d="M30 78 L12 148" stroke="rgba(79,142,247,0.4)" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M90 78 L108 148" stroke="rgba(79,142,247,0.4)" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <!-- Hands -->
+          <ellipse cx="10" cy="154" rx="6" ry="8" fill="none" stroke="rgba(79,142,247,0.5)" stroke-width="1"/>
+          <ellipse cx="110" cy="154" rx="6" ry="8" fill="none" stroke="rgba(79,142,247,0.5)" stroke-width="1"/>
+          <!-- Legs -->
+          <path d="M45 157 L35 240" stroke="rgba(79,142,247,0.4)" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M75 157 L85 240" stroke="rgba(79,142,247,0.4)" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <!-- Feet -->
+          <ellipse cx="31" cy="248" rx="10" ry="6" fill="none" stroke="rgba(79,142,247,0.5)" stroke-width="1"/>
+          <ellipse cx="89" cy="248" rx="10" ry="6" fill="none" stroke="rgba(79,142,247,0.5)" stroke-width="1"/>
+          <!-- Spine dots -->
+          <circle cx="60" cy="78" r="2" fill="rgba(34,211,160,0.7)"/>
+          <circle cx="60" cy="92" r="1.5" fill="rgba(34,211,160,0.5)"/>
+          <circle cx="60" cy="104" r="1.5" fill="rgba(34,211,160,0.5)"/>
+          <circle cx="60" cy="116" r="1.5" fill="rgba(34,211,160,0.5)"/>
+          <circle cx="60" cy="128" r="1.5" fill="rgba(34,211,160,0.5)"/>
+          <circle cx="60" cy="140" r="1.5" fill="rgba(34,211,160,0.5)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-tab active" onclick="showSection('sistemler', this)">🫀 Sistemler</div>
+    <div class="nav-tab" onclick="showSection('quiz', this)">📝 Quiz</div>
+    <div class="nav-tab" onclick="showSection('flashcard', this)">🃏 Flashcard</div>
+    <div class="nav-tab" onclick="showSection('mnemonic', this)">🧠 Mnemonic</div>
+    <div class="nav-tab" onclick="showSection('tablolar', this)">📊 Tablolar</div>
+    <div class="nav-tab" onclick="showSection('klinik', this)">🏥 Klinik</div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ======== SİSTEMLER ======== -->
+<div id="sec-sistemler" class="section active">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Sistemler & Bölgeler</div>
+      <div class="sec-sub">// karta tıkla → detay aç</div>
+    </div>
+    <div class="search-bar" style="width:260px">
+      <input class="search-input" placeholder="Sistem ara..." oninput="filterCards(this.value)">
+    </div>
+  </div>
+
+  <div id="detail-panel" class="detail-panel">
+    <div class="detail-head">
+      <div id="detail-icon" class="card-icon blue" style="margin-bottom:0; width:36px;height:36px;font-size:18px;"></div>
+      <h2 id="detail-title"></h2>
+      <button class="close-btn" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+  </div>
+
+  <div class="cards-grid" id="cards-grid">
+    <!-- Cards injected by JS -->
+  </div>
+</div>
+
+<!-- ======== QUIZ ======== -->
+<div id="sec-quiz" class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Quiz Zamanı</div>
+      <div class="sec-sub">// seçenek seç, açıklamayı gör</div>
+    </div>
+    <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap">
+      <select id="quiz-topic" class="search-input" style="width:auto;padding:0.5rem 1rem">
+        <option value="all">Tüm Konular</option>
+        <option value="kalp">Kardiyovasküler</option>
+        <option value="sinir">Sinir Sistemi</option>
+        <option value="kas">Kas & İskelet</option>
+        <option value="solunum">Solunum</option>
+        <option value="sindirim">Sindirim</option>
+        <option value="uriner">Üriner</option>
+      </select>
+      <button class="btn btn-primary" onclick="startQuiz()">Başla ↗</button>
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="qprogress" style="width:0%"></div></div>
+    <div id="quiz-container"></div>
+    <div class="quiz-score" id="quiz-score">
+      <div class="score-big" id="score-text">0/0</div>
+      <div class="score-msg" id="score-msg">Tebrikler!</div>
+      <button class="btn btn-primary" onclick="startQuiz()">Tekrar Dene ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== FLASHCARD ======== -->
+<div id="sec-flashcard" class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Flashcard Çalışması</div>
+      <div class="sec-sub">// karta tıkla → cevabı gör</div>
+    </div>
+    <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap">
+      <select id="fc-topic" class="search-input" style="width:auto;padding:0.5rem 1rem" onchange="loadFC()">
+        <option value="all">Tüm Kartlar</option>
+        <option value="kalp">Kalp & Damarlar</option>
+        <option value="sinir">Sinirler</option>
+        <option value="kaslar">Kaslar</option>
+        <option value="organlar">Organlar</option>
+      </select>
+      <button class="btn btn-ghost" onclick="shuffleFC()">🔀 Karıştır</button>
+    </div>
+  </div>
+
+  <div class="flashcard-wrap">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-front">
+        <div class="fc-hint">← tıkla, cevabı gör →</div>
+        <div class="fc-question" id="fc-q">Yükleniyor...</div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-answer" id="fc-a"></div>
+        <div class="fc-detail" id="fc-d"></div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="btn btn-ghost" onclick="prevFC()">← Önceki</button>
+      <span class="fc-counter" id="fc-counter">1 / 1</span>
+      <button class="btn btn-primary" onclick="nextFC()">Sonraki →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======== MNEMONIC ======== -->
+<div id="sec-mnemonic" class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Mnemonic'ler</div>
+      <div class="sec-sub">// ezberlemeyi kolaylaştıran ipuçları</div>
+    </div>
+  </div>
+  <div class="mnemonic-grid" id="mnemonic-list"></div>
+</div>
+
+<!-- ======== TABLOLAR ======== -->
+<div id="sec-tablolar" class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Karşılaştırmalı Tablolar</div>
+      <div class="sec-sub">// hızlı referans</div>
+    </div>
+  </div>
+  <div id="tablolar-body"></div>
+</div>
+
+<!-- ======== KLİNİK ======== -->
+<div id="sec-klinik" class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-title">Klinik Bağlantılar</div>
+      <div class="sec-sub">// anatominin klinik önemi</div>
+    </div>
+  </div>
+  <div class="cards-grid" id="klinik-cards"></div>
+</div>
+
+</main>
+
+<footer>
+  AnatomyMed · 2. Sınıf Tıp Final Rehberi · Türkçe · 2024 &nbsp;|&nbsp; 💙 Sema'ya ithafen &nbsp;|&nbsp; Başarılar!
+</footer>
+
+<script>
+// ========== DATA ==========
+
+const SYSTEMS = [
+  {
+    id: 'kalp', icon: '🫀', color: 'red', colorClass: 'c-red',
+    title: 'Kardiyovasküler Sistem',
+    subtitle: 'Kalp yapısı, kapaklar, damarlar',
+    tags: ['kalp', 'damar'],
+    facts: [
+      ['Kalbin katmanları', 'Endokardiyo → Miyokard → Epikard → Perikard (iç→dış)'],
+      ['Sağ kalp', 'Sağ atrium → Triküspit kapak → Sağ ventrikül → Pulmoner kapak → A. pulmonalis (oksijenasyon için akciğere)'],
+      ['Sol kalp', 'Sol atrium → Mitral (biküspit) kapak → Sol ventrikül → Aortik kapak → Aorta (sisteme)'],
+      ['Koroner arterler', 'LAD (sol ön inen) → ön duvar & septum; RCA → sağ ventrikül & AV nod; LCx → lateral & arka'],
+      ['İletim sistemi', 'SA nod (pace 60-100/dk) → AV nod → His demeti → Dal blokları → Purkinje lifleri'],
+      ['Frank-Starling', 'Ön yük ↑ → gerilim ↑ → kasılma gücü ↑ (belirli sınıra kadar)'],
+    ],
+    learn: [
+      'Triküspit = 3 yaprak, sağ AV; Mitral = 2 yaprak, sol AV',
+      'Pulmoner kapak & Aortik kapak = yarım ay (semilunar) kapaklar',
+      'SA nod = sağ atriuma, V. cava sup yakınında',
+      'AV nod gecikmesi = 0.12 sn (EKG\'de PR aralığı)',
+      'Aorta arcusu dalları (sağ→sol): Truncus brachiocephalicus → Sol a. carotis communis → Sol a. subclavia',
+    ]
+  },
+  {
+    id: 'sinir', icon: '🧠', color: 'purple', colorClass: 'c-purple',
+    title: 'Sinir Sistemi',
+    subtitle: 'Kraniyal sinirler, pleksuslar, refleksler',
+    tags: ['sinir', 'beyin'],
+    facts: [
+      ['12 Kraniyal Sinir', 'I Olfaktorius, II Optikus, III Okulomotor, IV Troklear, V Trigeminal, VI Abdusens, VII Fasyal, VIII Vestibulokohlear, IX Glossofaringeal, X Vagus, XI Aksesuar, XII Hipoglossal'],
+      ['Beyin lobları & işlevi', 'Frontal: motor+karar; Parietal: somatosensoriyal; Temporal: hafıza+dil; Oksipital: görme'],
+      ['Pleksus brachialis', 'C5-T1 kökleri; aksiller, muskulokutanöz, median, ulnar, radyal sinirler'],
+      ['Pleksus lumbosacralis', 'L1-S3; femoral (L2-L4), obturator (L2-L4), siyatik (L4-S3)'],
+      ['Omurilik segment', 'Konus medullaris → L1-L2 düzeyinde biter; kauda equina altında devam eder'],
+      ['Otonom sistem', 'Sempatik T1-L2 (torakolomber); Parasempatik S2-S4 + CN III,VII,IX,X (kraniyosakral)'],
+    ],
+    learn: [
+      'Saf duysal: I, II, VIII — Saf motor: III, IV, VI, XI, XII — Miks: V, VII, IX, X',
+      'CN VII (Fasyal): yüz mimik kasları; Bells palsy → tüm yüz yarısı',
+      'CN X (Vagus): karın organlarına kadar parasempatik',
+      'Dermatom C4 = omuz başı; L4 = diz kapağı; S1 = ayak tabanı',
+      '"On Old Olympus Tiny Tops A Finn And German Viewed Some Hops" → CN I–XII türleri',
+    ]
+  },
+  {
+    id: 'kas', icon: '💪', color: 'amber', colorClass: 'c-amber',
+    title: 'Kas & İskelet Sistemi',
+    subtitle: 'Eklemler, ligamentler, kasların siniri',
+    tags: ['kas', 'kemik'],
+    facts: [
+      ['Rotator manşet (SITS)', 'Supraspinatus (abdüksiyon başlatır), Infraspinatus (dış rotasyon), Teres minor (dış rot), Subscapularis (iç rot)'],
+      ['Diz eklemi', 'ACL (ön): tibia öne kaymasını önler; PCL (arka): tibia arkaya kaymasını önler; MCL, LCL; Medial & lateral menisküs'],
+      ['El bilek kasları', 'Fleksörler: median (lateral 3.5) + ulnar sinir (medial 1.5); Ekstansörler: radyal sinir'],
+      ['Boyun kasları', 'SCM (sternokleidomastoid): ipsilateral fleksiyon + kontralatreral rotasyon; CN XI innerve'],
+      ['Omurga kasları', 'Erektör spina (3 sütun), multifidus (stabilizasyon), iliopsoas (T12-L5 + femoral)'],
+      ['Kemik tipi', 'Uzun kemik büyümesi: epifiz plağı; yetişkinde kapanır; Havers kanalları osteon içinde'],
+    ],
+    learn: [
+      'Deltoid = aksiller sinir (C5-C6); omuz abdüksiyonu 15-90° arası',
+      'Biseps brachii = muskulokutanöz; hem fleksiyon hem supinasyon',
+      'Karpal tünel sendromu = median sinir (tenar atrofi, 1-3. parmak uyuşması)',
+      'Ulnar sinir sıkışması = Guyon kanalı veya medial epikondil (yüzük-serçe)',
+      'Trendelenburg yürüyüşü = gluteus medius (superior gluteal sinir) zayıflığı',
+    ]
+  },
+  {
+    id: 'solunum', icon: '🫁', color: 'blue', colorClass: 'c-blue',
+    title: 'Solunum Sistemi',
+    subtitle: 'Akciğer anatomisi, plevra, bronkus ağacı',
+    tags: ['solunum', 'akciğer'],
+    facts: [
+      ['Akciğer lobları', 'Sağ: 3 lob (üst-orta-alt), 10 segment; Sol: 2 lob (üst-alt), 8-10 segment; sol dar çünkü kalp sola'],
+      ['Bronkus ağacı', 'Trakea → Ana bronkus (sağ daha dik: 25°, sol: 45°) → Lobar → Segmental → Terminal → Respiratuar → Alveol'],
+      ['Plevra', 'Viseral plevra (akciğer yüzeyi) + Parietal plevra (göğüs duvarı); aralarında plevral boşluk (~5-20ml sıvı)'],
+      ['Diyafragma', 'C3-C5 (frenik sinir); Üç açıklık: T8=V. cava inf, T10=özofagus+vagus, T12=aorta+duktus torasikus'],
+      ['Solunum kasları', 'İnspirasyon: diyafragma (ana), eksternal interkostal; Ekspirasyon: zorlu = internal interkostal, karın kasları'],
+      ['Akciğer kökü', 'Sağda: bronkus arkada (en yüksek), pulmoner arter önde, ven altta; Solda bronkus üstte'],
+    ],
+    learn: [
+      'Sağ main bronkus daha kik → yabancı cisim buraya iner',
+      'Pnömotoraks = plevral boşluğa hava → akciğer kollapsı',
+      'Orta lob yalnızca sağda → sağ akciğer 3 loblu',
+      'Lingula = sol akciğerde orta loba karşılık gelen bölüm',
+      'Frenik sinir C3,C4,C5\'ten (C4 ana) = "3,4,5 keeps the diaphragm alive"',
+    ]
+  },
+  {
+    id: 'sindirim', icon: '🍖', color: 'green', colorClass: 'c-green',
+    title: 'Sindirim Sistemi',
+    subtitle: 'GIS anatomisi, organlar, kanallar',
+    tags: ['sindirim', 'karaciğer'],
+    facts: [
+      ['GIS sıralaması', 'Ağız→Özofagus (25cm)→Mide→Duodenum (C-şekli, retroperitoneal)→Jejunum→İleum→Çekum→Kolon→Rektum→Anüs'],
+      ['Karaciğer', '4 lob (sağ-sol-kaudat-kuadrat); Glisson kapsülü; Safra→safra kesesi→duktus sistikus→koleduok→Vater ampullası→duodenum'],
+      ['Pankreas', 'Baş (C\'de), gövde, kuyruk (dalak hilus); Wirsung kanalı Vater\'e; İslets of Langerhans: α(glukagon), β(insülin), δ(somatostatin)'],
+      ['Portal sistem', 'V. portae = V. mesenterica sup + V. splenica; karaciğere oksijensiz ama besin zengini kan taşır'],
+      ['Meckel divertikülü', '"Rule of 2": %2 nüfus, 2 fit distal ileumda, 2 yaş altı semptomatik, 2 tip doku'],
+      ['Periton', 'Visseral (organ yüzeyi) + Parietal (karın duvarı); Retroperitoneal organlar: SAD PUCKER'],
+    ],
+    learn: [
+      'Duodenum retroperitoneal (2. ve 3. kısım); jejunum-ileum intraperitoneal',
+      'McBurney noktası = apendiks; umbilikustan SIAS\'a %1/3',
+      'Karaciğer sağ alt kostal marj altında; Traube alanı = dalak',
+      'CBD (koleduok) = 8mm altında normal; üzerinde obstrüksiyon',
+      'Retroperitoneal: Böbrekler, Aorta, Duodenum (2-3), Pankreas, Üreterler, Çıkan/İnen kolon, Rektum = "SAD PUCKER"',
+    ]
+  },
+  {
+    id: 'uriner', icon: '🫘', color: 'teal', colorClass: 'c-teal',
+    title: 'Üriner Sistem',
+    subtitle: 'Böbrek anatomisi, üreteral yol',
+    tags: ['böbrek', 'üriner'],
+    facts: [
+      ['Böbrek konumu', 'T12-L3; Sol böbrek sağdan 1-2cm yüksekte; Sağ böbrek karaciğer altında daha aşağıda'],
+      ['Böbrek yapısı', 'Korteks (glomerüller): filtrasyon; Medulla (piramitler): konsantrasyon; Papilla→calyx minor→major→pelvis renalis→üreter'],
+      ['Adrenal bezler', 'Böbrek üzerinde retroperitoneal; korteks: mineral(aldosteron), gluko(kortizol), androjen; medulla: E+NE'],
+      ['Üreter darlıkları', '3 fizyolojik darlık: UPJ (pelviküreterik bileşke), iliak damarların üzerinden geçtiği yer, UVJ (mesaneye giriş)'],
+      ['Mesane', 'Detrusor kası (parasempatik S2-S4 = idrara çıkma); İç sfinkter: otonom; Dış sfinkter: somatik (pudendal n.)'],
+      ['Renal fasya', 'Gerota fasyası = perirenal yağ + böbreği sarar; parakolik boşluklarla bağlantılı'],
+    ],
+    learn: [
+      'Böbrek hilusu: ven önde, arter ortada, üreter arkada (VAU)',
+      'Hidronefrozda en sık taş yeri = UPJ darlığı',
+      'Adrenal medulla = modifiye sempatik ganglion = katekolamin',
+      'Sağ böbrek alt kutbu = Gerota fasyası içinde; mobilizasyonda dikkat',
+      '"Water under the bridge" = üreter iliak damarların altından geçer',
+    ]
+  },
+  {
+    id: 'endokrin', icon: '🦋', color: 'pink', colorClass: 'c-pink',
+    title: 'Endokrin Sistem',
+    subtitle: 'Bezler, hormonlar, hipofiz',
+    tags: ['hormon', 'tiroid'],
+    facts: [
+      ['Hipofiz bezi', 'Sella tursika içinde; Anterior (adenohipofiz): GH,TSH,ACTH,FSH,LH,PRL; Posterior (nörohipofiz): ADH+Oksitosin'],
+      ['Tiroid bezi', 'H şekli; 2 lob + isthmus; C3-C4; Superior tiroid a. (ext. karotid), İnferior tiroid a. (tirosservikal trunk); Geri bezi: PTH'],
+      ['Adrenal korteks', 'Dıştan içe "GFR" → Glomerüloza (aldosteron), Fasikülata (kortizol), Retikülaris (androjen)'],
+      ['Pankreas adaları', 'Alpha (periferik, glukagon), Beta (merkezi, insülin), Delta (somatostatin)'],
+      ['Paratiroid', '4 adet, tiroid arka yüzünde; PTH: kemik rezorp↑, böbrek Ca reabs↑, vit D aktiv↑'],
+      ['Gonadlar', 'Overler: östrojen + progesteron (foliküler: granüloza, luteal: korpus luteum); Testisler: Leydig hücre → testosteron'],
+    ],
+    learn: [
+      'RLN (rekürran laringeal sinir) = tiroid cerrahisinde risk → ses kısıklığı',
+      'Hiperpara: Ca↑ + P↓ + PTH↑ (kemik/böbrek/GIS)',
+      'ACTH → fasikülata → kortizol (gün içi en yüksek sabah)',
+      'Prolaktin = laktojen; dopamin tarafından inhibe edilir',
+      '"GFR" = Glomerüloza-Fasikülata-Retikülaris (dıştan içe adrenal korteks)',
+    ]
+  },
+  {
+    id: 'repro', icon: '🌸', color: 'pink', colorClass: 'c-pink',
+    title: 'Üreme Sistemi',
+    subtitle: 'Pelvik anatomi, gonadlar, kanallar',
+    tags: ['pelvis', 'reprodüktif'],
+    facts: [
+      ['Kadın pelvis', 'Uterus (antevert+antefleks normal); Broad ligament: round lig (ant), uteroovarial lig, lig tubae; Overin ligamenti≠round ligament'],
+      ['Uterus desteği', 'Cardinal (transvers servikal) lig: ana destek; Uterosacral lig; Pubosservikal lig; Broad lig: zayıf destek'],
+      ['Erkek üreme', 'Testis → vas deferens → ampulla → ejakülatör kanal → üretra; Epididim: sperm olgunlaşması (10-14 gün)'],
+      ['Pelvik damarlar', 'A. iliaca interna (hipogastrik): uterine, obturator, internal pudensal, superior/inferior gluteal'],
+      ['Pelvik tabanı', 'Levator ani (pubokoksigeus, iliokoksigeus, puborektalis) + koksigeus; pudendal sinir (S2-S4)'],
+      ['Perine', 'Ürogenital üçgen + anal üçgen; iskiorektal fossa yağ dolu; pudendal kanal (Alcock kanalı)'],
+    ],
+    learn: [
+      'Overin ligamenti = uterusu overe bağlar; round ligament = uterusa tutunan, labiye uzanan',
+      'Broad ligament içinde: tuba, ovari, round lig, uteroovarian lig, ve damarlar',
+      'Uterine arterin üreterin üzerinden geçer: "water under the bridge" (histerektomide risk)',
+      'Defans reflexi: pubokoksigeus kasılır (Kegel egzersizi)',
+      'Skene bezi = kadın periüretral; Bartholin bezi = büyük labium posterior (enfeksiyon sık)',
+    ]
+  },
+];
+
+const QUIZ_ALL = [
+  { q: "Kalbin pacemaker'ı olan SA nod hangi damara yakın yerleşir?", opts: ["V. cava inferior", "V. cava superior", "V. pulmonalis", "Aorta ascendens"], ans: 1, exp: "SA nod, sağ atriumun V. cava superior ile birleşim yerinde (sulcus terminalis yakınında) bulunur. 60-100 atım/dk ateşler.", topic: "kalp" },
+  { q: "Mitral kapak kaç yaprakçıktan oluşur?", opts: ["1", "2", "3", "4"], ans: 1, exp: "Mitral (biküspit) kapak 2 yaprakçıklıdır. Sol AV kapaktır. Triküspit ise 3 yaprakçıklı, sağ AV kapaktır.", topic: "kalp" },
+  { q: "LAD (Left Anterior Descending) koroner arterin ana beslenme alanı nedir?", opts: ["Arka duvar ve RV", "Ön duvar ve interventriküler septum", "Lateral duvar", "SA ve AV nod"], ans: 1, exp: "LAD, ön interventrikular sulcus boyunca ilerler; sol ventrikülün ön duvarını ve IV septumun büyük bölümünü besler. Sol koroner arterin LCx ile birlikte dalıdır.", topic: "kalp" },
+  { q: "Hangi kraniyal sinir yüz mimik kaslarını innerve eder?", opts: ["CN V", "CN VI", "CN VII", "CN VIII"], ans: 2, exp: "CN VII (Fasyal sinir) yüz mimik kaslarını innerve eder. Bell's palsyde etkilenir; tüm ipsilateral yüz yarısı tutulur (merkezi felçten ayırt eden önemli nokta).", topic: "sinir" },
+  { q: "Diyaframı innerve eden frenik sinir hangi kök(ler)den çıkar?", opts: ["C2-C3", "C3-C5", "C5-C7", "T1-T4"], ans: 1, exp: "C3, C4, C5 = 'C3,4,5 keeps the diaphragm alive'. Ana kök C4'tür.", topic: "solunum" },
+  { q: "Rotator manşet kasları arasında omuzda abdüksiyonu başlatan kas hangisidir?", opts: ["İnfraspinatus", "Teres minor", "Supraspinatus", "Subscapularis"], ans: 2, exp: "Supraspinatus ilk 15°'lik abdüksiyonu başlatır; devamını deltoid (0-90°) ve trapezius üstlenir. SITS: Supra, Infra, Teres min, Sub.", topic: "kas" },
+  { q: "Karpal tünel sendromunda hangi sinir sıkışır?", opts: ["Ulnar sinir", "Radyal sinir", "Aksiller sinir", "Median sinir"], ans: 3, exp: "Median sinir karpal tünel içinden geçer. Tenar atrofi, 1-3. parmak + 4. parmak radyal yarısı uyuşması görülür. Gece ağrısı tipiktir.", topic: "kas" },
+  { q: "Sağ ana bronkus sol ana bronkusa göre neden daha dik (vertikal) seyreder?", opts: ["Kalp basısı yok", "Aorta sola kayar", "Trakea sağa devam eder", "Karaciğer altında bastırılır"], ans: 2, exp: "Sağ ana bronkus trakea ile yaklaşık 25°, sol ise 45° açı yapar. Bu nedenle yabancı cisimler genellikle sağ ana bronkusa gider.", topic: "solunum" },
+  { q: "Meckel divertikülü genellikle ileum'un neresinde bulunur?", opts: ["Proksimal 1/3", "Distal 2 fit (60 cm)", "İleoçekal valve yakın 2 fit", "Orta kısım"], ans: 2, exp: "Rule of 2: %2, 2 yaş altı semptom, 2 tip doku, 2 fit distal ileumda (yaklaşık 60cm ileosekal valvden). Vitellointestinal kanal kalıntısıdır.", topic: "sindirim" },
+  { q: "Adrenal korteks dıştan içe hangi sırayla dizilir?", opts: ["GFR (Glomerüloza-Fasikülata-Retikülaris)", "FGR", "RFG", "GRF"], ans: 0, exp: "GFR = Glomerüloza (mineralokortikoid-aldosteron), Fasikülata (glukokortikoid-kortizol), Retikülaris (androjens). Medulla = E+NE.", topic: "endokrin" },
+  { q: "Portal ven hangi iki damarin birleşmesiyle oluşur?", opts: ["V. mesenterica sup + V. mesenterica inf", "V. mesenterica sup + V. splenica", "V. splenica + V. mesenterica inf", "V. renalis + V. splenica"], ans: 1, exp: "V. portae = V. mesenterica superior + V. splenica. Pankreas başı arkasında oluşur. V. mesenterica inf genellikle V. splenica'ya dökülür.", topic: "sindirim" },
+  { q: "Üreter hangi yapının altından geçerek mesaneye ulaşır?", opts: ["A. iliaca communis", "A. iliaca externa", "A. iliaca interna", "Uterine arter"], ans: 0, exp: "'Water under the bridge' = üreter iliak damarların altından geçer. İliak bifurkasyon yakınında (L5-S1) A. iliaca communis önünden/altından geçer.", topic: "uriner" },
+  { q: "CN X (Vagus) sinirine ait olmayan seçenek hangisidir?", opts: ["Kalp hızını yavaşlatır", "Bağırsak peristaltizmini artırır", "Mesane kasılmasını kontrol eder", "Özofagus motilitesini düzenler"], ans: 2, exp: "Mesane parasempatik kontrolü S2-S4 pelvik splankhnik sinirlerden sağlanır. Vagus toraksa ve batın organlarına kadar uzanır ama pelvik organları innerve etmez.", topic: "sinir" },
+  { q: "Trendelenburg belirtisi hangi kasın zayıflığına işaret eder?", opts: ["Gluteus maksimus", "Gluteus medius", "İliopsoas", "Tensor fascia latae"], ans: 1, exp: "Gluteus medius (superior gluteal sinir L4-L5-S1) karşı taraf pelvisi destekler. Zayıflayınca ayakta durulduğunda pelvis karşı tarafa eğilir.", topic: "kas" },
+  { q: "Diyafragmadan hangi yapılar T10 seviyesinde geçer?", opts: ["Aorta + duktus torasikus", "V. cava inferior", "Özofagus + vagus sinirleri", "Sempatik zincir"], ans: 2, exp: "T8 = V. cava inf; T10 = Özofagus + vagus sinirleri; T12 = Aorta + duktus torasikus + azigos ven. Kolay: 8<10<12 gibi VEA.", topic: "solunum" },
+];
+
+const FLASHCARDS_ALL = [
+  { q: "Kalp kaç tabakadan oluşur? İç→dış sırası?", a: "4 tabaka", d: "Endokard → Miyokard → Epikard → Perikard (fibröz+seröz)", topic: "kalp" },
+  { q: "Semilunar kapaklar nelerdir ve konumları?", a: "Pulmoner + Aortik", d: "Her ikisi de 3 yaprakçıklı; pulmoner sağ ventrikül çıkışında, aortik sol ventrikül çıkışında", topic: "kalp" },
+  { q: "AV nodun görevi nedir?", a: "İletim gecikmesi ~0.12s", d: "SA noddan gelen impulsu geciktirir, ventriküler dolumu sağlar. EKG'de PR aralığı", topic: "kalp" },
+  { q: "CN III (Okulomotor) hangi göz kaslarını innerve eder?", a: "4 düz + 1 oblik + levator palpebrae", d: "SR, IR, MR, IO kasları + levator palpebrae; CN III palsy = göz aşağı-dışa, ptoz, midriyazis", topic: "sinir" },
+  { q: "Brachial pleksus hangi köklerden oluşur?", a: "C5–T1", d: "5 kök → 3 trunkus → 6 dal → 3 kord → 5 terminal dal (aksiller, muskulokutanöz, median, ulnar, radyal)", topic: "sinir" },
+  { q: "Siyatik sinir hangi köklerden çıkar?", a: "L4–S3", d: "En büyük sinir; siyatik çentikten çıkar, popliteada tibial + peroneal'a ayrılır", topic: "sinir" },
+  { q: "SITS kasları nelerdir?", a: "Supraspinatus, Infraspinatus, Teres minor, Subscapularis", d: "Hepsi glenohumeral eklemi sarar; SITS = Rotator manşet 4 kasının baş harfleri", topic: "kaslar" },
+  { q: "Median sinir hangi bölgede hasara uğrarsa tenar atrofi olur?", a: "Karpal tünel (el bileği)", d: "1-3. parmak + 4. parmagın radyal yarısı palmar uyuşma; tenar atrofi geç bulgu", topic: "kaslar" },
+  { q: "Akciğer kaç loblu, kaç segment?", a: "Sağ 3 lob 10 seg; Sol 2 lob 8-10 seg", d: "Sol akciğer küçük çünkü kalp sola; sol üst lobda lingula orta loba karşılık", topic: "organlar" },
+  { q: "Pankreas hangi yapının içindedir?", a: "C-şeklinde duodenum içinde", d: "Baş=duodenum C'si içinde; kuyruk=dalak hilusuna uzanır; retroperitoneal (baş+gövde)", topic: "organlar" },
+  { q: "Karaciğerin 4 lobu nelerdir?", a: "Sağ, Sol, Kaudat, Kuadrat", d: "Kaudat = V. cava inf arkasında; Kuadrat = quadrate (safra kesesi fossa yanında)", topic: "organlar" },
+  { q: "McBurney noktası nerededir?", a: "Umbilikustan SIAS'a %1/3", d: "Apendiksin yerini işaret eder; appendisit ağrısının hassasiyet noktası", topic: "organlar" },
+  { q: "Böbrek hilusundaki yapılar ön→arka sırası?", a: "Ven - Arter - Üreter (VAU)", d: "Renal ven önde, renal arter ortada, üreter arkada; cerrahi diseksiyonda önemli", topic: "organlar" },
+  { q: "Adrenal korteks dıştan içe katmanları ve hormonları?", a: "GFR: Glomerüloza(aldosteron), Fasikülata(kortizol), Retikülaris(androjen)", d: "Medulla ayrı: modifiye sempatik ganglion → E+NE salgılar", topic: "organlar" },
+  { q: "Uterine arterin üretere göre konumu?", a: "Uterine arter üreterin ÜSTÜNden geçer", d: "'Water under the bridge' = üreter köprünün (uterine arterin) altından geçer; histerektomide üreter hasarı riski", topic: "organlar" },
+];
+
+const MNEMONICS = [
+  { label: "Kraniyal Sinirler 1-12", title: "CN I-XII türleri (Duysal/Motor/Miks)", text: "Some Say Marry Money But My Brother Says Big Brains Matter Most", expand: "<span>S</span>=Sensory: I,II,VIII — <span>M</span>=Motor: III,IV,VI,XI,XII — <span>B</span>=Both: V,VII,IX,X" },
+  { label: "Adrenal Korteks", title: "Dıştan içe katmanlar GFR", text: "Gidip Fabrikaya Raporunu bırak", expand: "<span>G</span>lomerüloza (aldosteron) → <span>F</span>asikülata (kortizol) → <span>R</span>etikülaris (androjen)" },
+  { label: "Rotator Manşet", title: "4 kas: SITS", text: "\"SITS\" kısaltması yeterli!", expand: "<span>S</span>upraspinatus (abdüksiyon) + <span>I</span>nfraspinatus (dış rot) + <span>T</span>eres minor (dış rot) + <span>S</span>ubscapularis (iç rot)" },
+  { label: "Diyafragma Açıklıkları", title: "T8, T10, T12 açıklıkları", text: "8=ate, 10=ozofagus, 12=aorta → ATE OZE AOte → VEA", expand: "<span>T8</span>: V. cava inferior (8 harfi, 2 kelime) — <span>T10</span>: Özofagus + Vagus — <span>T12</span>: Aorta + Duktus torasikus" },
+  { label: "Retroperitoneal Organlar", title: "SAD PUCKER", text: "SAD PUCKER", expand: "<span>S</span>uprarenal glands, <span>A</span>orta+IVC, <span>D</span>uodenum (2-3), <span>P</span>ankreas, <span>U</span>reterler, <span>C</span>olon (çıkan-inen), <span>K</span>idneys (böbrekler), <span>E</span>sophagus (thoracic), <span>R</span>ectum" },
+  { label: "Brakiyal Pleksus", title: "C5-T1 terminal dallar", text: "My Aunt Raped Uncle's Medulla", expand: "<span>M</span>uskulokutanöz — <span>A</span>ksiller — <span>R</span>adyal — <span>U</span>lnar — <span>M</span>edian" },
+  { label: "Frenik Sinir", title: "C3,4,5 → diyafragma", text: "C3-4-5 keeps the diaphragm alive", expand: "Ana kök <span>C4</span>; frenik sinir perikard yanından toraks içine iner" },
+  { label: "Böbrek Hilusu", title: "Ön→arka sıra", text: "VAU = Ven, Arter, Üreter", expand: "Renal <span>V</span>en öne, <span>A</span>rter ortada, <span>Ü</span>reter arkada; VAU sırasıyla üç yapı" },
+  { label: "Diz Bağları", title: "ACL vs PCL", text: "ACL öne kaymasını ÖNLER, PCL geriye", expand: "<span>A</span>CL: tibia öne kaymasını önler (test: ön çekmece, Lachman); <span>P</span>CL: tibia arkaya kaymasını önler (arka çekmece)" },
+  { label: "Kardiyak iletim", title: "SA → AV → His → Purkinje", text: "Some Anatomists Have Pretty Pathways", expand: "<span>S</span>A nod → <span>A</span>V nod → <span>H</span>is demeti → <span>P</span>urkinje lifleri — gecikme AV nodda" },
+  { label: "Aorta dalları", title: "Arkustan sağ→sol 3 dal", text: "Terry (the) Big Athlete Loves Sports", expand: "<span>T</span>runcus brachiocephalicus → sol <span>a</span>. carotis communis → sol <span>a</span>. subclavia" },
+  { label: "Paratiroid Hormon", title: "PTH etkileri", text: "PTH = 'Pull The Hormones' → Ca çeker yukarı", expand: "<span>K</span>emik rezorpsiyonu ↑, <span>B</span>öbrek Ca reabs ↑, <span>V</span>it D aktivasyonu ↑ → serum Ca↑, P↓" },
+];
+
+const TABLES = [
+  {
+    title: "Kapaklar Karşılaştırması",
+    headers: ["Kapak", "Konum", "Yaprakçık", "Açılma", "Klinik"],
+    rows: [
+      ["Triküspit", "Sağ AV", "3", "Diyastol (sağ)", "Triküspit yetersizliği"],
+      ["Pulmoner", "RV çıkış", "3 (semilunar)", "Sistol (sağ)", "Pulmoner stenoz"],
+      ["Mitral (biküspit)", "Sol AV", "2", "Diyastol (sol)", "Mitral stenoz, yetmezlik"],
+      ["Aortik", "LV çıkış", "3 (semilunar)", "Sistol (sol)", "Aortik stenoz, yetmezlik"],
+    ]
+  },
+  {
+    title: "Brachial Pleksus Terminal Sinirler",
+    headers: ["Sinir", "Kök", "Motor", "Duyu", "Hasar"],
+    rows: [
+      ["Aksiller", "C5-C6", "Deltoid, Teres minor", "Omuz dış yüz", "Dört köşe boşluk; omuz abd kaybı"],
+      ["Muskulokutanöz", "C5-C7", "Biceps, Brachialis, Coracobrachialis", "Önkol lateral", "Fleksiyon+supinasyon kaybı"],
+      ["Median", "C6-T1", "Tenar, fleksörler (lat 3.5)", "El palmar lat", "Karpal tünel, tenar atrofi"],
+      ["Ulnar", "C8-T1", "Hipotenör, interosseous", "El med 1.5 parmak", "Pençe eli (ring+small)"],
+      ["Radyal", "C5-T1", "Tüm ekstansörler", "El dorsal yüz", "Bilek düşmesi (wrist drop)"],
+    ]
+  },
+  {
+    title: "Diyafragma Açıklıkları",
+    headers: ["Seviye", "Geçen Yapılar", "İpucu"],
+    rows: [
+      ["T8", "V. cava inferior", "IVC = 8 harf, 2 kelime; T8"],
+      ["T10", "Özofagus + sol+sağ vagus trunki", "10 = öze+vagus (ev halkı birlikte)"],
+      ["T12", "Aorta + Duktus torasikus + Azigos ven", "Aorta retroperitoneal, en altta geçer"],
+    ]
+  },
+  {
+    title: "Kraniyal Sinir Özeti",
+    headers: ["CN", "İsim", "Tür", "Ana Görev", "Test"],
+    rows: [
+      ["I", "Olfaktorius", "Duysal", "Koku", "Her iki burun ayrı test"],
+      ["II", "Optikus", "Duysal", "Görme", "Snellen, görme alanı"],
+      ["III", "Okulomotor", "Motor", "Göz hareketi (4+1 kas)", "Pupil refleksi, göz hareketi"],
+      ["V", "Trigeminal", "Miks", "Yüz duyusu + çiğneme", "Kornea refleksi, çiğneme"],
+      ["VII", "Fasyal", "Miks", "Mimik kasları + tad", "Yüz ifadesi, tad (ant 2/3)"],
+      ["VIII", "Vestibulokohlear", "Duysal", "İşitme + denge", "Weber, Rinne"],
+      ["X", "Vagus", "Miks", "Viseral motor+duysal", "Damak refleksi, ses"],
+      ["XII", "Hipoglossal", "Motor", "Dil kasları", "Dil çıkar, zayıf tarafa döner"],
+    ]
+  },
+];
+
+const KLINIK = [
+  { icon: "🫀", color: "red", colorClass: "c-red", title: "STEMI Korelasyonu", subtitle: "LAD oklüzyonu", tags: ["kardiyoloji"], body: "LAD tıkanması → ön duvar MI + septum tutulumu. EKG: V1-V4'te ST elevasyonu. LAD = 'Left Artery of Death' (en kritik damar)." },
+  { icon: "💪", color: "amber", colorClass: "c-amber", title: "Karpal Tünel Sendromu", subtitle: "Median sinir sıkışması", tags: ["nöroloji"], body: "Fleksör retinakulum altında median sinir basısı. Tenar atrofi, nocturnal parestezi (1-3. parmak). Tinel ve Phalen testi pozitif." },
+  { icon: "🧠", color: "purple", colorClass: "c-purple", title: "Bell's Palsy", subtitle: "CN VII periferik felci", tags: ["nöroloji"], body: "Tüm yüz yarısı tutulur (alın dahil = periferik). Merkezi felçte alın korunur. Viral etiyoloji (HSV-1) sık. Kortikosteroid tedavisi." },
+  { icon: "🫁", color: "blue", colorClass: "c-blue", title: "Pnömotoraks", subtitle: "Plevral boşluğa hava", tags: ["göğüs"], body: "Spontan: uzun ince genç erkek. Tansiyon pnömotoraks: trakea karşıya devie, JVD, hipotansiyon = acil iğne dekompresyonu (2. ICS MCL)." },
+  { icon: "🍖", color: "green", colorClass: "c-green", title: "Appendisit", subtitle: "McBurney noktası", tags: ["cerrahi"], body: "Apendiks: ileoçekal valveden 2-3cm; McBurney noktası hassasiyeti. Rovsing, Psoas, Obturator işaretleri. Rebound hassasiyeti." },
+  { icon: "🫘", color: "teal", colorClass: "c-teal", title: "Üreter Taşı", subtitle: "3 fizyolojik darlık", tags: ["üroloji"], body: "Taş en sık UPJ'de durur. İkinci darlık: iliak damarlar üzerinden geçişte. Üçüncü: UVJ (en dar). Kolik ağrı, hematüri." },
+];
+
+// ======= STATE =======
+let currentSection = 'sistemler';
+let quizData = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let fcData = [];
+let fcIdx = 0;
+let fcFlipped = false;
+
+// ======= INIT =======
+window.onload = () => {
+  renderCards();
+  renderMnemonics();
+  renderTables();
+  renderKlinik();
+  startQuiz();
+  loadFC();
+};
+
+function showSection(name, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  el.classList.add('active');
+  currentSection = name;
+}
+
+// ======= SYSTEMS =======
+function renderCards(filter = '') {
+  const grid = document.getElementById('cards-grid');
+  const lower = filter.toLowerCase();
+  const items = SYSTEMS.filter(s =>
+    !lower || s.title.toLowerCase().includes(lower) || s.subtitle.toLowerCase().includes(lower) || s.tags.some(t => t.includes(lower))
+  );
+  grid.innerHTML = items.map(s => `
+    <div class="card c-${s.color}" onclick="openDetail('${s.id}')">
+      <div class="card-icon ${s.color}">${s.icon}</div>
+      <h3>${s.title}</h3>
+      <p>${s.subtitle}</p>
+      <div class="card-footer">
+        ${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        <span style="font-size:12px;color:var(--muted);font-family:var(--mono)">${s.facts.length} konu →</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCards(v) { renderCards(v); closeDetail(); }
+
+function openDetail(id) {
+  const s = SYSTEMS.find(x => x.id === id);
+  if (!s) return;
+  const panel = document.getElementById('detail-panel');
+  document.getElementById('detail-icon').textContent = s.icon;
+  document.getElementById('detail-title').textContent = s.title;
+  document.getElementById('detail-body').innerHTML = `
+    <div class="detail-col">
+      <h4>Temel Bilgiler</h4>
+      <ul class="fact-list">
+        ${s.facts.map(([k,v]) => `<li><strong>${k}:</strong> ${v}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="detail-col">
+      <h4>Sınav İpuçları</h4>
+      <ul class="fact-list">
+        ${s.learn.map(l => `<li>${l}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ======= QUIZ =======
+function startQuiz() {
+  const topic = document.getElementById('quiz-topic').value;
+  quizData = topic === 'all' ? [...QUIZ_ALL] : QUIZ_ALL.filter(q => q.topic === topic);
+  quizData = quizData.sort(() => Math.random() - 0.5);
+  quizIdx = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById('quiz-score').classList.remove('show');
+  renderQuizQ();
+}
+
+function renderQuizQ() {
+  if (quizIdx >= quizData.length) { showScore(); return; }
+  const q = quizData[quizIdx];
+  const pct = Math.round((quizIdx / quizData.length) * 100);
+  document.getElementById('qprogress').style.width = pct + '%';
+  document.getElementById('quiz-container').innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-num">Soru ${quizIdx + 1} / ${quizData.length}</div>
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o, i) => `
+          <button class="quiz-opt" id="opt-${i}" onclick="answerQuiz(${i})">
+            <span class="opt-letter">${'ABCD'[i]}</span>
+            ${o}
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-explain" id="quiz-explain"><strong>Açıklama:</strong> ${q.exp}</div>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" id="next-btn" style="display:none" onclick="nextQ()">Sonraki →</button>
+    </div>
+  `;
+  quizAnswered = false;
+}
+
+function answerQuiz(i) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizData[quizIdx];
+  document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+  document.getElementById('opt-' + i).classList.add(i === q.ans ? 'correct' : 'wrong');
+  if (i !== q.ans) document.getElementById('opt-' + q.ans).classList.add('correct');
+  if (i === q.ans) quizScore++;
+  document.getElementById('quiz-explain').classList.add('show');
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQ() { quizIdx++; renderQuizQ(); }
+
+function showScore() {
+  document.getElementById('quiz-container').innerHTML = '';
+  document.getElementById('qprogress').style.width = '100%';
+  const sc = document.getElementById('quiz-score');
+  sc.classList.add('show');
+  const pct = Math.round((quizScore / quizData.length) * 100);
+  document.getElementById('score-text').textContent = `${quizScore}/${quizData.length}`;
+  document.getElementById('score-msg').textContent = pct >= 80 ? '🎉 Harika! Finali geçersin!' : pct >= 60 ? '👍 İyi gidiyorsun, biraz daha çalış!' : '📚 Tekrar etmeni öneririm.';
+}
+
+// ======= FLASHCARD =======
+function loadFC() {
+  const topic = document.getElementById('fc-topic').value;
+  fcData = topic === 'all' ? [...FLASHCARDS_ALL] : FLASHCARDS_ALL.filter(f => f.topic === topic);
+  fcIdx = 0; resetFC();
+}
+
+function shuffleFC() {
+  fcData = fcData.sort(() => Math.random() - 0.5);
+  fcIdx = 0; resetFC();
+}
+
+function resetFC() {
+  fcFlipped = false;
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  updateFC();
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', fcFlipped);
+}
+
+function updateFC() {
+  if (!fcData.length) return;
+  const f = fcData[fcIdx];
+  document.getElementById('fc-q').textContent = f.q;
+  document.getElementById('fc-a').textContent = f.a;
+  document.getElementById('fc-d').textContent = f.d;
+  document.getElementById('fc-counter').textContent = `${fcIdx + 1} / ${fcData.length}`;
+}
+
+function nextFC() {
+  fcIdx = (fcIdx + 1) % fcData.length;
+  fcFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  updateFC();
+}
+
+function prevFC() {
+  fcIdx = (fcIdx - 1 + fcData.length) % fcData.length;
+  fcFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  updateFC();
+}
+
+// ======= MNEMONICS =======
+function renderMnemonics() {
+  document.getElementById('mnemonic-list').innerHTML = MNEMONICS.map(m => `
+    <div class="mnemonic-card">
+      <div class="mnemonic-label">${m.label}</div>
+      <div class="mnemonic-title">${m.title}</div>
+      <div class="mnemonic-text">${m.text}</div>
+      <div class="mnemonic-expand">${m.expand}</div>
+    </div>
+  `).join('');
+}
+
+// ======= TABLES =======
+function renderTables() {
+  document.getElementById('tablolar-body').innerHTML = TABLES.map(t => `
+    <div style="margin-bottom:2.5rem">
+      <h3 style="font-size:1rem;font-weight:600;margin-bottom:1rem;letter-spacing:-0.01em">${t.title}</h3>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <thead><tr>${t.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ======= KLİNİK =======
+function renderKlinik() {
+  document.getElementById('klinik-cards').innerHTML = KLINIK.map(k => `
+    <div class="card c-${k.color}" style="cursor:default">
+      <div class="card-icon ${k.color}">${k.icon}</div>
+      <h3>${k.title}</h3>
+      <p style="color:var(--accent);font-size:12px;margin-bottom:0.6rem;font-family:var(--mono)">${k.subtitle}</p>
+      <p>${k.body}</p>
+      <div class="card-footer">
+        ${k.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+</script>
+</body>
+</html>
